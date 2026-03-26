@@ -5,8 +5,11 @@
 
 class Player {
 private:
+	int Level = 1;
+	int exp = 0;
+	int maxExp = 100;
 	std::string name;
-	int mental, maxMantal;   // HP
+	int mental, maxMental;   // HP
 	int focus, maxFocus;     // MP
 	int atk;                 // 공격력
 	int def;                 // 방어력
