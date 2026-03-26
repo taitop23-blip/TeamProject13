@@ -12,6 +12,8 @@ class BattleManager
 	private:
 		SkillManager* skillManager;
 
+		bool isRunningAway;
+
 	public:
 		BattleManager();
 
