@@ -123,31 +123,31 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\TeamProject13\TeamProject13\BattleManager.cpp" />
-    <ClCompile Include="EventManager.cpp" />
-    <ClCompile Include="..\..\..\TeamProject13\TeamProject13\main.cpp" />
-    <ClCompile Include="..\..\..\TeamProject13\TeamProject13\Monster.cpp" />
-    <ClCompile Include="..\..\..\TeamProject13\TeamProject13\Player.cpp" />
-    <ClCompile Include="..\..\..\TeamProject13\TeamProject13\ShopManager.cpp" />
-    <ClCompile Include="..\..\..\TeamProject13\TeamProject13\SkillManager.cpp" />
-    <ClCompile Include="..\..\..\TeamProject13\TeamProject13\TownManager.cpp" />
-    <ClCompile Include="..\..\..\TeamProject13\TeamProject13\Utils.cpp" />
-    <ClCompile Include="..\..\..\TeamProject13\TeamProject13\WorldManager.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\TeamProject13\TeamProject13\BattleManager.h" />
-    <ClInclude Include="EventManager.h" />
-    <ClInclude Include="..\..\..\TeamProject13\TeamProject13\Item.h" />
-    <ClInclude Include="..\..\..\TeamProject13\TeamProject13\Monster.h" />
-    <ClInclude Include="..\..\..\TeamProject13\TeamProject13\Player.h" />
-    <ClInclude Include="..\..\..\TeamProject13\TeamProject13\ShopManager.h" />
-    <ClInclude Include="..\..\..\TeamProject13\TeamProject13\SkillManager.h" />
-    <ClInclude Include="..\..\..\TeamProject13\TeamProject13\TownManager.h" />
-    <ClInclude Include="..\..\..\TeamProject13\TeamProject13\Utils.h" />
-    <ClInclude Include="..\..\..\TeamProject13\TeamProject13\WorldManager.h" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="..\..\..\TeamProject13\TeamProject13\TeamProject13.vcxproj.user" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="BattleManager.cpp" />
+    <ClCompile Include="EventManager.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Monster.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="ShopManager.cpp" />
+    <ClCompile Include="SkillManager.cpp" />
+    <ClCompile Include="TownManager.cpp" />
+    <ClCompile Include="Utils.cpp" />
+    <ClCompile Include="WorldManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BattleManager.h" />
+    <ClInclude Include="EventManager.h" />
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="Monster.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="ShopManager.h" />
+    <ClInclude Include="SkillManager.h" />
+    <ClInclude Include="TownManager.h" />
+    <ClInclude Include="Utils.h" />
+    <ClInclude Include="WorldManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

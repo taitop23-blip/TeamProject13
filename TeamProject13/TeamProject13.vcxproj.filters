@@ -15,70 +15,70 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\TeamProject13\TeamProject13\BattleManager.cpp">
+    <None Include="..\..\..\TeamProject13\TeamProject13\TeamProject13.vcxproj.user" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="BattleManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="EventManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\TeamProject13\TeamProject13\main.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\TeamProject13\TeamProject13\Monster.cpp">
+    <ClCompile Include="Monster.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\TeamProject13\TeamProject13\Player.cpp">
+    <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\TeamProject13\TeamProject13\ShopManager.cpp">
+    <ClCompile Include="ShopManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\TeamProject13\TeamProject13\SkillManager.cpp">
+    <ClCompile Include="SkillManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\TeamProject13\TeamProject13\TownManager.cpp">
+    <ClCompile Include="TownManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\TeamProject13\TeamProject13\Utils.cpp">
+    <ClCompile Include="Utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\TeamProject13\TeamProject13\WorldManager.cpp">
+    <ClCompile Include="WorldManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\TeamProject13\TeamProject13\BattleManager.h">
+    <ClInclude Include="BattleManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="EventManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\TeamProject13\TeamProject13\Item.h">
+    <ClInclude Include="Item.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\TeamProject13\TeamProject13\Monster.h">
+    <ClInclude Include="Monster.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\TeamProject13\TeamProject13\Player.h">
+    <ClInclude Include="Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\TeamProject13\TeamProject13\ShopManager.h">
+    <ClInclude Include="ShopManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\TeamProject13\TeamProject13\SkillManager.h">
+    <ClInclude Include="SkillManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\TeamProject13\TeamProject13\TownManager.h">
+    <ClInclude Include="TownManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\TeamProject13\TeamProject13\Utils.h">
+    <ClInclude Include="Utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\TeamProject13\TeamProject13\WorldManager.h">
+    <ClInclude Include="WorldManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\..\TeamProject13\TeamProject13\TeamProject13.vcxproj.user" />
   </ItemGroup>
 </Project>
