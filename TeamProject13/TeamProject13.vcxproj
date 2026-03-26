@@ -124,27 +124,24 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BattleManager.cpp" />
-    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="ItemManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="ShopManager.cpp" />
-    <ClCompile Include="TownManager.cpp" />
+    <ClCompile Include="SkillManager.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="WorldManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BattleManager.h" />
-    <ClInclude Include="GameManager.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemManager.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="ShopManager.h" />
-    <ClInclude Include="TownManager.h" />
+    <ClInclude Include="SkillManager.h" />
     <ClInclude Include="Utils.h" />
-    <ClInclude Include="Weapon.h" />
     <ClInclude Include="WorldManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
