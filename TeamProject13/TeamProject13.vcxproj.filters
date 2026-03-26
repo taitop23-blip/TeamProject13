@@ -18,7 +18,7 @@
     <ClCompile Include="..\..\..\TeamProject13\TeamProject13\BattleManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\TeamProject13\TeamProject13\EventManeger.cpp">
+    <ClCompile Include="EventManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\TeamProject13\TeamProject13\main.cpp">
@@ -50,7 +50,7 @@
     <ClInclude Include="..\..\..\TeamProject13\TeamProject13\BattleManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\TeamProject13\TeamProject13\EventManeger.h">
+    <ClInclude Include="EventManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\TeamProject13\TeamProject13\Item.h">

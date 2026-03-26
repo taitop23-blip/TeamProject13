@@ -124,7 +124,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\TeamProject13\TeamProject13\BattleManager.cpp" />
-    <ClCompile Include="..\..\..\TeamProject13\TeamProject13\EventManeger.cpp" />
+    <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="..\..\..\TeamProject13\TeamProject13\main.cpp" />
     <ClCompile Include="..\..\..\TeamProject13\TeamProject13\Monster.cpp" />
     <ClCompile Include="..\..\..\TeamProject13\TeamProject13\Player.cpp" />
@@ -136,7 +136,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\TeamProject13\TeamProject13\BattleManager.h" />
-    <ClInclude Include="..\..\..\TeamProject13\TeamProject13\EventManeger.h" />
+    <ClInclude Include="EventManager.h" />
     <ClInclude Include="..\..\..\TeamProject13\TeamProject13\Item.h" />
     <ClInclude Include="..\..\..\TeamProject13\TeamProject13\Monster.h" />
     <ClInclude Include="..\..\..\TeamProject13\TeamProject13\Player.h" />
