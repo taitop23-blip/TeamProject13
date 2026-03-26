@@ -9,6 +9,7 @@ private:
     int dangerLevel;
     const int maxProgress = 100;
     bool isFinalBossAppeared = false;
+    void ShowActionMenu(const Player& p) const;
 
 public:
     WorldManager() : dangerLevel(0), isFinalBossAppeared(false) {}
@@ -27,7 +28,6 @@ public:
 
     // 위험도 체크 및 빌런 소환 판단
     bool CheckEncounter();
-
     void ResetDanger() { dangerLevel = 0; }
     int GetDanger() const { return dangerLevel; }
 
@@ -41,5 +41,5 @@ public:
     }
 
     void ResetFinalBoss() { isFinalBossAppeared = false; }
-};
+}; 
 
