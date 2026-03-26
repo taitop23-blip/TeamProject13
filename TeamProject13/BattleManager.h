@@ -20,14 +20,14 @@ class BattleManager
 		void StartBattle(Player& player, Monster& monster);
 
 	private:
-		void DisplayStatus(const Player& player, const Monster& monster);
-		void DisplayMenu();
-		void PlayerTurn(Player& player, Monster& monster);
-		void MonsterTurn(Player& player, Monster& monster);
+		void DisplayStatus(const Player& player, const Monster& monster);	// 전투시 플레이어와 몬스터의 상태표시
+		void DisplayMenu();													// 플레이어의 선택지
+		void PlayerTurn(Player& player, Monster& monster);					// 배틀 플레이어의 턴
+		void MonsterTurn(Player& player, Monster& monster);					// 배틀 빌런의 턴
 
-		bool IsBattleOver(const Player& player, const Monster& monster);
+		bool IsBattleOver(const Player& player, const Monster& monster);	// 배틀 종료
 
-		void ProcessVictory(Player& player, Monster& monster);
-		void ProcessDefeat(Player& player);
+		void ProcessVictory(Player& player, Monster& monster);				// 플레이어가 승리 또는 빌런의 승리
+		void ProcessDefeat(Player& player);									// 플레이어가 패배
 };
 
