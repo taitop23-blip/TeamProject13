@@ -2,4 +2,4 @@
 
 Monster DepartmentManager("∫Œ¿Â¥‘", 50, 20, 30);
 Monster Designer("±‚»π¿⁄", 20, 50, 20);
-Monster boss("∆¿¿Â¥‘", 100, 50, 50);
+Monster Boss("∆¿¿Â¥‘", 100, 50, 50);
