@@ -24,7 +24,10 @@ class BattleManager
 	private:
 		void DisplayStatus(const Player& player, const Monster& monster);	// 전투시 플레이어와 몬스터의 상태표시
 		void DisplayMenu();													// 플레이어의 선택지
+
 		void PlayerTurn(Player& player, Monster& monster);					// 배틀 플레이어의 턴
+		bool UseItem(Player& player);										// 플레이어의 아이템 선택지
+
 		void MonsterTurn(Player& player, Monster& monster);					// 배틀 빌런의 턴
 
 		bool IsBattleOver(const Player& player, const Monster& monster);	// 배틀 종료
