@@ -1,6 +1,8 @@
 // WorldManager.cpp
 
 #include "WorldManager.h"
+#include "Monster.h"
+#include "BattleManager.h"
 #include "Player.h"
 #include "Utils.h"
 #include <iostream>
@@ -9,11 +11,11 @@
 void WorldManager::ShowActionMenu(const Player& p) const
 {
 	std::cout << "\n========[ 업무 중 ]========" << std::endl;
-	//std::cout << " 진행도: " << p.GetProgress() << "%\n";
-	std::cout << " 위험도: " << dangerLevel;
-		     // << " 목숨 " << p.GetLife() << "개\n";
-	//std::cout << " 멘탈 " << p.GetMental() << "/" << p.GetMaxMental()
-		     // << " 집중력 " << p.GetFocus() << "/" << p.GetMaxFocus() "\n";
+	std::cout << " 진행도: " << p.GetProgress() << "%\n";
+	std::cout << " 위험도: " << dangerLevel
+		      << " 목숨 " << p.GetLife() << "개\n";
+	std::cout << " 멘탈 " << p.GetMental() << "/" << p.GetMaxMental()
+		      << " 집중력 " << p.GetFocus() << "/" << p.GetMaxFocus() << "\n";
 
 	Utils::PrintLine('-', 30);
 	std::cout << " 1. 업무 집중    (진행도+, 멘탈-, 집중력(Mp)-, 위험도+)\n";
@@ -29,9 +31,9 @@ void WorldManager::ShowActionMenu(const Player& p) const
 void WorldManager::FocusWork(Player& p){
 	
 	int progressGain = Utils::GetRandom(5, 10);
-	// p.AddProgress(progressGain);
-	// p.SubMental(5);
-	// p.SubFocus(10);
+	p.AddProgress(progressGain);
+	p.SubMental(5);
+	p.SubFocus(10);
 	dangerLevel += 15;
 
 	std::cout << "\n [업무 집중] 열심히 일했습니다.\n";
@@ -40,8 +42,8 @@ void WorldManager::FocusWork(Player& p){
 
 void WorldManager::DrinkCoffee(Player& p)
 {
-	// p.AddFocus(20);
-	// p.SubMental(3);
+	p.AddFocus(20);
+	p.SubMental(3);
 
 	std::cout << "\n [커피 충전] 아이스 아메리카노 쭈왑!\n";
 	std::cout << " 집중력 +20 | 멘탈 -3\n";
@@ -49,9 +51,9 @@ void WorldManager::DrinkCoffee(Player& p)
 
 void WorldManager::WatchYoutube(Player& p)
 {
-	// p.AddProgress(-5);
-	// p.AddMental(10);
-	// p.SubFocus(15);
+	p.AddProgress(-5);
+	p.AddMental(10);
+	p.SubFocus(15);
 	dangerLevel += 20;
 
 	std::cout << "\n  [유튜브 시청] 잠깐만 보려다가...\n";
@@ -60,8 +62,8 @@ void WorldManager::WatchYoutube(Player& p)
 
 void WorldManager::Stretching(Player& p)
 {
-	// p.AddMental(8);
-	// p.AddFocus(5);
+	p.AddMental(8);
+	p.AddFocus(5);
 
 	std::cout << "\n  [몰래 스트레칭] 슬쩍 기지개를 켭니다.\n";
 	std::cout << "  멘탈 +8 | 집중력 +5\n";
@@ -96,53 +98,55 @@ bool WorldManager::RunWorkLoop(Player& p)
 		// 진행도 100% → 보스전 신호
 		if (IsReadyForFinalBoss(p.GetProgress())) return true;
 
-		// 멘탈 체크
-		if (!p.IsAlive())
+		// 멘탈 체크 
+		if (p.GetMental() <= 0)
 		{
 			if (p.GetLife() > 0)
 			{
-				p.SubLife(1);
-				std::cout << "\n  [멘탈 붕괴] 동료의 응원으로 다시 일어납니다!\n";
-				std::cout << "  남은 목숨: " << p.GetLife()
-					<< "개 | 패널티: 진행도 -10%\n";
 				p.RestoreFullMental();
-				p.AddProgress(-10);
+
+				std::cout << "\n [시스템] 멘탈을 부여잡고 다시 자리에 앉습니다. (남은 뽀삐사진: " << p.GetLife() << "개)\n";
 			}
 			else
 			{
-				// 목숨도 0 → 게임오버 신호
-				return false;
+				return false; // 목숨이 0이면 루프 탈출
 			}
 		}
 
 		ShowActionMenu(p);
-		int choice = Utils::GetInput(1, 6);
+
+		int choice;
+		std::cin >> choice;
 
 		switch (choice)
 		{
-		case 1: FocusWork(p);   break;
+		case 1: FocusWork(p); break;
 		case 2: DrinkCoffee(p); break;
-		case 3: WatchYoutube(p);break;
-		case 4: Stretching(p);  break;
-		case 5: p.ShowStatus(); continue;
-		case 6: ShopManager::RunShop(p); continue;
+		case 3: WatchYoutube(p); break;
+		case 4: Stretching(p); break;
+		//case 5: continue; // 상태 확인 (추후 구현)
+		//case 6: continue; // 상점 가기 (추후 구현)
+		default: std::cout << " 올바른 번호를 입력하세요.\n"; continue;
 		}
-
-		// 행동 후 랜덤 이벤트 넣기
-		
 
 		// 빌런 조우 판정
 		if (CheckEncounter())
 		{
-			// 빌런 이름 풀 
 			const char* villains[] = {
-				"부장님", "기획자", "팀장님",
+				"부장님", "기획자", "팀장님"
 			};
 			std::string name = villains[Utils::GetRandom(0, 2)];
 
-			Monster m(name, std::max(1, dangerLevel / 10 + 1));
+			int pressure = std::max(30, 20 + dangerLevel);
+			int atk = std::max(10, 5 + (dangerLevel / 5));
+			int def = std::max(5, dangerLevel / 10);
+
+			Monster m(name, pressure, atk, def);
+
 			BattleManager bm;
 			bm.StartBattle(p, m);
 		}
 	}
+
+	return false;
 }

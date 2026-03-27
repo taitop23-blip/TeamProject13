@@ -123,9 +123,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="..\..\..\TeamProject13\TeamProject13\TeamProject13.vcxproj.user" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="BattleManager.cpp" />
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="main.cpp" />

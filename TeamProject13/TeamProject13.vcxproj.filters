@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\TeamProject13\TeamProject13\TeamProject13.vcxproj.user" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="BattleManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
