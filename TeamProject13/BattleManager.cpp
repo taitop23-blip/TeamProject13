@@ -3,6 +3,7 @@
 #include "BattleManager.h"
 #include "Player.h"
 #include "Monster.h"
+#include "Item.h"
 
 #include <iostream>
 #include <iomanip>
@@ -13,17 +14,17 @@ bool BattleManager::StartBattle(Player& player, Monster& monster)
 {
 	isRunningAway = false;
 
-	while (true)
+	while (!IsBattleOver(player, monster))
 	{
 		DisplayStatus(player, monster);
 		DisplayMenu();
+
 		PlayerTurn(player, monster);
 		if (IsBattleOver(player, monster)) break;
 
 		MonsterTurn(player, monster);
-		if (IsBattleOver(player, monster)) break;
 	}
-	if (player.getHP() <= 0) {
+	if (player.GetMental() <= 0) {
 		ProcessDefeat(player, monster);
 		return false;
 	}
@@ -98,7 +99,7 @@ void BattleManager::PlayerTurn(Player& player, Monster& monster)
 			std::cout << monster.getName() << "에게 압박감이 " << damage << "만큼 감소했습니다.\n";
 
 			std::cout << monster.getName() << "의 현재 압박감 : " << monster.getPressure() << " / " << monster.getMaxPressure() << '\n';
-			break;
+			return;
 		}
 			
 
@@ -108,9 +109,11 @@ void BattleManager::PlayerTurn(Player& player, Monster& monster)
 			break;
 
 		case 3:
-			std::cout << "미구현 선택입니다.\n";
-			//if (item)
-			//	item->UseItem(player, monster);
+			if (UseItem(player))
+			{
+				return;
+			}
+			DisplayMenu();
 			break;
 
 		case 4:
@@ -128,10 +131,63 @@ void BattleManager::PlayerTurn(Player& player, Monster& monster)
 			{
 				std::cout << monster.getName() << " : 어디가나 당장 이리와!\n";
 			}
-			break;
+			return;
 		}
 		default:
 			std::cout << "선택 방식이 잘못되었습니다.. 다시 입력해주세요.\n";
+			DisplayMenu();
+			break;
+	}
+}
+
+bool BattleManager::UseItem(Player& player)
+{
+	int choice;
+
+	std::cout << "\n===============[ 아이템 창 ]===============\n";
+	std::cout << "1. 커피\n";
+	std::cout << "2. 핫식스\n";
+	std::cout << "3. 몬스터에이드\n";
+	std::cout << "4. 게이밍 레이저 키보드\n";
+	std::cout << "5. DeathAdder V3 Pro 마우스\n";
+	std::cout << "0. 선택 취소\n";
+	std::cout << "=============================================\n";
+	std::cout << "사용할 아이템을 선택하세요 : \n";
+	std::cin >> choice;
+
+	switch (choice)
+	{
+		case 1:
+			std::cout << "커피를 마셨습니다.\n";
+			player.AddMental(10);
+			return true;
+
+		case 2:
+			std::cout << "핫식스를 마셨습니다.\n";
+			player.AddMental(20);
+			return true;
+
+		case 3:
+			std::cout << "몬스터에이드를 마셨습니다.\n";
+			player.AddFocus(10);
+			return true;
+
+		case 4:
+			std::cout << "게이밍 레이저 키보드를 사용했습니다.\n";
+			player.AddProgress(15);
+			return true;
+
+		case 5:
+			std::cout << "DeathAdder V3 Pro 마우스를 사용했습니다.\n";
+			player.AddProgress(25);
+			return true;
+
+		case 0:
+			std::cout << "선택을 취소하셨습니다.\n";
+			return false;
+
+		default:
+			std::cout << "잘못된 아이템 선택입니다. 다시 선택해주세요.\n";
 			break;
 	}
 }
@@ -157,7 +213,7 @@ bool BattleManager::IsBattleOver(const Player& player, const Monster& monster)
 	if (monster.getPressure() <= 0)
 		return true;
 
-	if (player.getHP() <= 0)
+	if (player.GetMental() <= 0)
 		return true;
 
 	if (isRunningAway)
