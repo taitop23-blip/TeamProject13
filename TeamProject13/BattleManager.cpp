@@ -1,6 +1,8 @@
 // BattleManager.cpp
 
 #include "BattleManager.h"
+#include "Player.h"
+#include "Monster.h"
 
 #include <iostream>
 #include <iomanip>
@@ -101,7 +103,7 @@ void BattleManager::PlayerTurn(Player& player, Monster& monster)
 
 		case 2:
 			if (skillManager)
-				skillManager->UseSkill(player, monster);
+				skillManager->Use(player, monster);
 			break;
 
 		case 3:
@@ -161,4 +163,58 @@ bool BattleManager::IsBattleOver(const Player& player, const Monster& monster)
 		return true;
 
 	return false;
+}
+
+void BattleManager::ProcessDefeat(Player& player, Monster& monster)
+{
+	std::cout << "멘탈이 " << player.GetMental() << "이 되었습니다.\n";
+	std::cout << monster.getName() << "에게 잔소리를 심하게 들었습니다.\n";
+	std::cout << monster.getName() << "이(가) 자기 자리로 돌아갑니다.\n";
+	std::cout << player.GetName() << "은 사직서를 꺼냅니다..\n";
+	std::cout << "그 때--\n 멍! 멍!멍!\n";
+	std::cout << "....뽀삐가 떠올랐습니다.";
+	std::cout << "그래... 사료 사야지...\n";
+	std::cout << "당신은 눈물을 닦고 다시 일을 시작합니다.\n"
+
+	player.SubLife();
+
+	std::cout << "뽀삐사진을 1개 잃었습니다.\n";
+	
+	player.AddProgress(-10);
+	std::cout << "진행도가 10 감소했습니다.\n";
+}
+
+void BattleManager::ProcessVictory(Player& player, Monster& monster)
+{
+	int expReward = 30;
+	int goldReward = 500;
+
+	std::cout << "============================\n";
+	std::cout << "[ 전투 승리! ]\n";
+	std::cout << "============================\n";
+
+	std::cout << "휴.. " << monster.getName() << "에게서 무사히 버텨냈습니다.\n";
+
+	std::cout << "[ 보상 획득 ]\n";
+
+	std::cout << "+ 경험치 + : " << expReward << "\n";
+	std::cout << "+ 야근수당 + : " << goldReward << "\n";
+	std::cout << "+ 아이템 + : " << "???" << "\n";					//구현 중
+
+	std::cout << "============================\n";
+
+	player.AddExp(expReward);
+	player.AddGold(goldReward);
+}
+
+void BattleManager::ProcessRunAway(Player& player, Monster& monster)
+{
+	std::cout << "============================\n";
+	std::cout << "[ 도망 성공! ]\n";
+	std::cout << "============================\n";
+
+	std::cout << "간신히 " << monster.getName() << "의 시야에서 벗어났습니다.\n";
+	std::cout << player.GetName() << "은 숨을 고르며 다시 업무 자리로 돌아갑니다.\n";
+
+	std::cout << "============================\n";
 }
