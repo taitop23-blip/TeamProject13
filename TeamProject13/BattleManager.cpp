@@ -9,7 +9,7 @@
 #include <cstdlib>
 #include <ctime>
 
-void BattleManager::StartBattle(Player& player, Monster& monster)
+bool BattleManager::StartBattle(Player& player, Monster& monster)
 {
 	isRunningAway = false;
 
@@ -17,24 +17,25 @@ void BattleManager::StartBattle(Player& player, Monster& monster)
 	{
 		DisplayStatus(player, monster);
 		DisplayMenu();
-
 		PlayerTurn(player, monster);
-
-		if (IsBattleOver(player, monster))
-			break;
+		if (IsBattleOver(player, monster)) break;
 
 		MonsterTurn(player, monster);
-
-		if (IsBattleOver(player, monster))
-			break;
+		if (IsBattleOver(player, monster)) break;
 	}
-
-	if (player.getHP() <= 0)
+	if (player.getHP() <= 0) {
 		ProcessDefeat(player, monster);
-	else if (monster.getPressure() <= 0)
-		ProcessVictory(player, monster);
-	else if (isRunningAway)
-		ProcessRunAway(player, monster);
+		return false;
+	}
+	else {
+		if (!isRunningAway) {
+			ProcessVictory(player, monster);
+		}
+		else {
+			ProcessRunAway(player, monster);
+		}
+		return true;
+	}
 }
 
 void BattleManager::DisplayStatus(const Player& player, const Monster& monster)

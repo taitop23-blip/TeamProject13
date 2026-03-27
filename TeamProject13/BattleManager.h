@@ -19,7 +19,7 @@ class BattleManager
 
 		void SetSkillManager(SkillManager* sm);
 
-		void StartBattle(Player& player, Monster& monster);
+		bool StartBattle(Player& player, Monster& monster);
 
 	private:
 		void DisplayStatus(const Player& player, const Monster& monster);	// 전투시 플레이어와 몬스터의 상태표시
