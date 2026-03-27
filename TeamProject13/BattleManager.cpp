@@ -30,38 +30,38 @@ void BattleManager::StartBattle(Player& player, Monster& monster)
 	}
 
 	if (player.getHP() <= 0)
-		ProcessDefeat(player);
+		ProcessDefeat(player, monster);
 	else if (monster.getPressure() <= 0)
 		ProcessVictory(player, monster);
 	else if (isRunningAway)
-		ProcessRunAway();
+		ProcessRunAway(player, monster);
 }
 
 void BattleManager::DisplayStatus(const Player& player, const Monster& monster)
 {
 	std::cout << "===============================\n";
 	std::cout << "[플레이어]\n";
-	std::cout << std::left << std::setw(10) << "멘탈"
-		<< " : " << std::right << std::setw(3) << player.GetMental()
-		<< "/" << std::setw(3) << player.GetMaxMental() << '\n';
+	std::cout << std::left << std::setw(10) << "멘탈" 
+		<< " : " << std::right << std::setw(3) << player.GetMental() << "/"
+		<< std::setw(3) << player.GetMaxMental() << '\n';
 
 	std::cout << std::left << std::setw(10) << "집중력"
-		<< " : " << std::right << std::setw(3) << player.GetFocus()
-		<< "/" << std::setw(3) << player.GetMaxFocus() << '\n';
+		<< " : " << std::right << std::setw(3) << player.GetFocus() << "/"
+		<< std::setw(3) << player.GetMaxFocus() << '\n';
 
 	int life = player.GetLife();
 
 	std::cout << std::left << std::setw(10) << "뽀삐사진" << " : ";
 		for (int i = 0; i < life; i++)
 		{
-			std::cout << "♥";
+			std::cout << "*";
 		}
 	std::cout << '\n';
 
 	std::cout << "[빌런]\n";
 	std::cout << std::left << std::setw(10) << "압박감"
-		<< " : " << std::right << std::setw(3) << monster.getPressure()
-		<< "/" << std::setw(3) << monster.getMaxPressure() << '\n';
+		<< " : " << std::right << std::setw(3) << monster.getPressure() << "/"
+		<< std::setw(3) << monster.getMaxPressure() << '\n';
 
 	std::cout << "===============================\n";
 }
@@ -138,7 +138,7 @@ void BattleManager::PlayerTurn(Player& player, Monster& monster)
 void BattleManager::MonsterTurn(Player& player, Monster& monster)
 {
 	std::cout << "\n[ 몬스터 턴 ]\n";
-	std::cout << monster.getName() << "이(가) " << player.getName << "를 압박합니다.\n";
+	std::cout << monster.getName() << "이(가) 잔소리를 시작합니다.\n";
 
 	int damage = monster.getAtk() - player.GetDef();
 
@@ -156,7 +156,7 @@ bool BattleManager::IsBattleOver(const Player& player, const Monster& monster)
 	if (monster.getPressure() <= 0)
 		return true;
 
-	if (player.getHP <= 0)
+	if (player.getHP() <= 0)
 		return true;
 
 	if (isRunningAway)
@@ -170,11 +170,11 @@ void BattleManager::ProcessDefeat(Player& player, Monster& monster)
 	std::cout << "멘탈이 " << player.GetMental() << "이 되었습니다.\n";
 	std::cout << monster.getName() << "에게 잔소리를 심하게 들었습니다.\n";
 	std::cout << monster.getName() << "이(가) 자기 자리로 돌아갑니다.\n";
-	std::cout << player.GetName() << "은 사직서를 꺼냅니다..\n";
+	std::cout << "사직서를 꺼내드는 순간...\n";
 	std::cout << "그 때--\n 멍! 멍!멍!\n";
 	std::cout << "....뽀삐가 떠올랐습니다.";
 	std::cout << "그래... 사료 사야지...\n";
-	std::cout << "당신은 눈물을 닦고 다시 일을 시작합니다.\n"
+	std::cout << "당신은 눈물을 닦고 다시 일을 시작합니다.\n";
 
 	player.SubLife();
 
@@ -186,8 +186,8 @@ void BattleManager::ProcessDefeat(Player& player, Monster& monster)
 
 void BattleManager::ProcessVictory(Player& player, Monster& monster)
 {
-	int expReward = 30;
-	int goldReward = 500;
+	//int expReward = 30;
+	//int goldReward = 500;
 
 	std::cout << "============================\n";
 	std::cout << "[ 전투 승리! ]\n";
@@ -197,14 +197,14 @@ void BattleManager::ProcessVictory(Player& player, Monster& monster)
 
 	std::cout << "[ 보상 획득 ]\n";
 
-	std::cout << "+ 경험치 + : " << expReward << "\n";
-	std::cout << "+ 야근수당 + : " << goldReward << "\n";
-	std::cout << "+ 아이템 + : " << "???" << "\n";					//구현 중
+	std::cout << "+ 경험치 + : 30\n";
+	std::cout << "+ 야근수당 + : 500원\n";
+	//std::cout << "+ 아이템 + : " << "???" << "\n";					//구현 중
 
 	std::cout << "============================\n";
 
-	player.AddExp(expReward);
-	player.AddGold(goldReward);
+	//player.AddExp(expReward);
+	//player.AddGold(goldReward);
 }
 
 void BattleManager::ProcessRunAway(Player& player, Monster& monster)
@@ -214,7 +214,7 @@ void BattleManager::ProcessRunAway(Player& player, Monster& monster)
 	std::cout << "============================\n";
 
 	std::cout << "간신히 " << monster.getName() << "의 시야에서 벗어났습니다.\n";
-	std::cout << player.GetName() << "은 숨을 고르며 다시 업무 자리로 돌아갑니다.\n";
+	std::cout << "숨을 고르며 다시 업무 자리로 돌아갑니다.\n";
 
 	std::cout << "============================\n";
 }
