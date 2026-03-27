@@ -23,7 +23,7 @@ void SkillManager::Use(Player& user, Monster& target)
 		return;
 	}
 
-	int temp = user.GetFocus() -= focuscost;
+	user.SubFocus(focuscost);
 	currentCoolTime = cooltime;
 
 	//공격 스킬
@@ -32,11 +32,11 @@ void SkillManager::Use(Player& user, Monster& target)
 		if (name == "야근싫어")
 		{
 			cout << "야근 싫어!" << endl;
-			int dmg = (user.GetAtk() + 20) - target.getDef();
+			int dmg = (user.GetAtk() + 20) - target.GetDef();
 			if (dmg < 0) dmg = 0;
 
-			target.getPressure() - dmg;
-			if (target.getPressure() < 0) target.getPressure() = 0;
+			target.GetPressure() - dmg;
+			if (target.GetPressure() < 0) target.GetPressure() = 0;
 
 			cout << dmg << " 데미지!" << endl;
 		}
@@ -44,11 +44,11 @@ void SkillManager::Use(Player& user, Monster& target)
 		else if (name == "복붙")
 		{
 			cout << "Ctrl+c Ctrl+v" << endl;
-			int dmg = user.GetAtk() - target.getDef();
+			int dmg = user.GetAtk() - target.GetDef();
 			if (dmg < 0) dmg = 0;
 
-			target.getPressure() -= dmg;
-			if (target.getPressure() < 0) target.getPressure() = 0;
+			target.GetPressure() -= dmg;
+			if (target.GetPressure() < 0) target.GetPressure() = 0;
 
 			cout << dmg << " 데미지!" << endl;
 		}
