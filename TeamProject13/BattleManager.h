@@ -31,5 +31,6 @@ class BattleManager
 
 		void ProcessVictory(Player& player, Monster& monster);				// 플레이어가 승리 또는 빌런의 승리
 		void ProcessDefeat(Player& player);									// 플레이어가 패배
+		void ProcessRunAway();												// 도망 처리
 };
 
