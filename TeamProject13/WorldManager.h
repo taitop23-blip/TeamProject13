@@ -14,6 +14,8 @@ private:
 public:
     WorldManager() : dangerLevel(0), isFinalBossAppeared(false) {}
 
+    bool RunWorkLoop(Player& p);
+
     // 업무 집중 (진행도↑, 멘탈↓, 위험도↑)
     void FocusWork(Player& p);
 
@@ -39,7 +41,5 @@ public:
         }
         return false;
     }
-
-    void ResetFinalBoss() { isFinalBossAppeared = false; }
 }; 
 

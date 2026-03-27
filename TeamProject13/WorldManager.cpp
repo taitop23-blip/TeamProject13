@@ -25,6 +25,7 @@ void WorldManager::ShowActionMenu(const Player& p) const
 	Utils::PrintLine('-', 30);
 }
 
+
 void WorldManager::FocusWork(Player& p){
 	
 	int progressGain = Utils::GetRandom(5, 10);
@@ -85,4 +86,63 @@ bool WorldManager::CheckEncounter() {
 			std::cout << "\n ºô·±ÀÌ ´ç½ÅÀ» Áö³ªÃÄ°©´Ï´Ù.\n";
 	}
 	return encounter;
+}
+
+
+bool WorldManager::RunWorkLoop(Player& p)
+{
+	while (true)
+	{
+		// ÁøÇàµµ 100% ¡æ º¸½ºÀü ½ÅÈ£
+		if (IsReadyForFinalBoss(p.GetProgress())) return true;
+
+		// ¸àÅ» Ã¼Å©
+		if (!p.IsAlive())
+		{
+			if (p.GetLife() > 0)
+			{
+				p.SubLife(1);
+				std::cout << "\n  [¸àÅ» ºØ±«] µ¿·áÀÇ ÀÀ¿øÀ¸·Î ´Ù½Ã ÀÏ¾î³³´Ï´Ù!\n";
+				std::cout << "  ³²Àº ¸ñ¼û: " << p.GetLife()
+					<< "°³ | ÆÐ³ÎÆ¼: ÁøÇàµµ -10%\n";
+				p.RestoreFullMental();
+				p.AddProgress(-10);
+			}
+			else
+			{
+				// ¸ñ¼ûµµ 0 ¡æ °ÔÀÓ¿À¹ö ½ÅÈ£
+				return false;
+			}
+		}
+
+		ShowActionMenu(p);
+		int choice = Utils::GetInput(1, 6);
+
+		switch (choice)
+		{
+		case 1: FocusWork(p);   break;
+		case 2: DrinkCoffee(p); break;
+		case 3: WatchYoutube(p);break;
+		case 4: Stretching(p);  break;
+		case 5: p.ShowStatus(); continue;
+		case 6: ShopManager::RunShop(p); continue;
+		}
+
+		// Çàµ¿ ÈÄ ·£´ý ÀÌº¥Æ® ³Ö±â
+		
+
+		// ºô·± Á¶¿ì ÆÇÁ¤
+		if (CheckEncounter())
+		{
+			// ºô·± ÀÌ¸§ Ç® 
+			const char* villains[] = {
+				"ºÎÀå´Ô", "±âÈ¹ÀÚ", "ÆÀÀå´Ô",
+			};
+			std::string name = villains[Utils::GetRandom(0, 2)];
+
+			Monster m(name, std::max(1, dangerLevel / 10 + 1));
+			BattleManager bm;
+			bm.StartBattle(p, m);
+		}
+	}
 }

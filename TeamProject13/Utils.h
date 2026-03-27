@@ -13,5 +13,8 @@ public:
 
 	// 난수 생성 함수 추가 ex) Utils::GetRandom(1, 100)
 	static int GetRandom(int min, int max);
+
+	// 범위 체크 입력 (벗어나면 재입력 요청)
+	static int GetInput(int min, int max, const std::string& prompt = "선택: ");
 };
 
