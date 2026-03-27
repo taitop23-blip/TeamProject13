@@ -58,7 +58,7 @@ int main()
     std::cout << "오늘도 무사히 퇴근 할 수 있을까?\n";
 
     Player player = SelectCharacter();
-    WorldManager world;
+    WorldManager world; 
 
     // 게임 루프
     bool reachedBoss = world.RunWorkLoop(player);
