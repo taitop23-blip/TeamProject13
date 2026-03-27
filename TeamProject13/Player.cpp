@@ -61,6 +61,13 @@ Player::Player(int mental, int focus, int atk, int def)
 	this->def = def;
 }
 
+void Player::ShowCurrentStatus()
+{
+	std::cout << "===================================================\n";
+	std::cout << name << "의 능력치\n" << "멘탈(HP): " << GetMental() << " 집중력(MP): " << GetFocus() << " 업무 효율 : " << GetAtk() << " 스트레스 저항 : " << GetDef() << " 소지 골드 : " << GetGold();
+	std::cout << std::endl << "===================================================\n";
+}
+
 
 
 
