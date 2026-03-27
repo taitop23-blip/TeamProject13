@@ -21,7 +21,7 @@ public:
 	int cooltime;
 	int currentCoolTime;
 
-	void Skill(std::string n, SkillType t, int p, int cost, int ct); //스킬 생성자
+	SkillManager(std::string n, SkillType t, int p, int cost, int ct); //스킬 생성자
 
 	bool CanUse(int currentfocus); //스킬 사용가능여부 확인
 	void Use(Player& user, Player& target); //스킬 실행 함수
