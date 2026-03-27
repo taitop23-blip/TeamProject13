@@ -34,28 +34,48 @@ public:
 	int GetDef() const { return def; }
 	int GetGold() const { return gold; }
 
+	//set 함수
+	//void SetExp(int exp) { this->exp = exp; }
+	//void SetMaxExp(int maxExp) { this->maxExp = maxExp; }
+	//void Setmental(int mental) { this->mental = mental; }
+	//void SetMaxMental(int maxMental) { this->maxMental = maxMental; }
+	//void SetFocus(int focus) { this->focus = focus; }
+	//void SetMaxFocus(int maxFocus) { this->maxFocus = maxFocus; }
+	//void SetLife(int life) { this->life = life; }
+	//void SetAtk(int atk) { this->atk = atk; }
+	//void SetDef(int def) { this->def = def; }
+	//void SetGold(int gold) { this->gold = gold; }
+	
+
+
 	//add 함수
+	void AddExp(int val);
 	void AddMental(int val);
 	void AddFocus(int val);
 	void AddProgress(int val);
+	void AddAtk(int val) { atk += val; }
+	void AddDef(int val) { def += val; }
 	void Addgold(int val) {gold += val;}
+	void AddLevel() { Level += 1; }
+
 	
 	//sub 함수
 	void SubMental(int val);
 	void SubFocus(int val);
-	void SubLife() { life -= 1; }
-	void SubGold(int val) { gold -= val; }
+	void SubLife();
+	void SubGold(int val);
+	void SubProgress(int val);
 
 	//전투 관련
 	int getHP() const { return mental; } // Battlemanager 작업용
 	void takeDamage(int damage) { SubMental(damage); }
-	bool IsDead() const {return life<= 0; }
+	bool IsDead() const {return life <= 0; }
 
 	//부활 관련
 	void RestoreFullMental() {mental = maxMental;}
 
 	// 생성자
-	Player(int mental, int focus, int atk, int def);
+	Player(const std::string& name,int mental, int focus, int atk, int def);
 
 	//스탯 보여주기
 	void ShowCurrentStatus();
