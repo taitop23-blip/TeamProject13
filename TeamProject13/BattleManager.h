@@ -29,8 +29,8 @@ class BattleManager
 
 		bool IsBattleOver(const Player& player, const Monster& monster);	// 배틀 종료
 
+		void ProcessDefeat(Player& player, Monster& monster);				// 플레이어가 패배
 		void ProcessVictory(Player& player, Monster& monster);				// 플레이어가 승리 또는 빌런의 승리
-		void ProcessDefeat(Player& player);									// 플레이어가 패배
-		void ProcessRunAway();												// 도망 처리
+		void ProcessRunAway(Player& player, Monster& monster);												// 도망 처리
 };
 
