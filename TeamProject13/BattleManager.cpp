@@ -62,8 +62,8 @@ void BattleManager::DisplayStatus(const Player& player, const Monster& monster)
 
 	std::cout << "[빌런]\n";
 	std::cout << std::left << std::setw(10) << "압박감"
-		<< " : " << std::right << std::setw(3) << monster.getPressure() << "/"
-		<< std::setw(3) << monster.getMaxPressure() << '\n';
+		<< " : " << std::right << std::setw(3) << monster.GetPressure() << "/"
+		<< std::setw(3) << monster.GetMaxPressure() << '\n';
 
 	std::cout << "===============================\n";
 }
@@ -88,17 +88,17 @@ void BattleManager::PlayerTurn(Player& player, Monster& monster)
 	{
 		case 1:
 		{
-			int damage = player.GetAtk() - monster.getDef();
+			int damage = player.GetAtk() - monster.GetDef();
 
 			if (damage < 0)
 				damage = 0;
 
-			monster.takeDamage(damage);
+			monster.TakeDamage(damage);
 
 			std::cout << "여기 정리 자료 있습니다!\n";
-			std::cout << monster.getName() << "에게 압박감이 " << damage << "만큼 감소했습니다.\n";
+			std::cout << monster.GetName() << "에게 압박감이 " << damage << "만큼 감소했습니다.\n";
 
-			std::cout << monster.getName() << "의 현재 압박감 : " << monster.getPressure() << " / " << monster.getMaxPressure() << '\n';
+			std::cout << monster.GetName() << "의 현재 압박감 : " << monster.GetPressure() << " / " << monster.GetMaxPressure() << '\n';
 			return;
 		}
 			
@@ -129,7 +129,7 @@ void BattleManager::PlayerTurn(Player& player, Monster& monster)
 			}
 			else
 			{
-				std::cout << monster.getName() << " : 어디가나 당장 이리와!\n";
+				std::cout << monster.GetName() << " : 어디가나 당장 이리와!\n";
 			}
 			return;
 		}
@@ -195,9 +195,9 @@ bool BattleManager::UseItem(Player& player)
 void BattleManager::MonsterTurn(Player& player, Monster& monster)
 {
 	std::cout << "\n[ 몬스터 턴 ]\n";
-	std::cout << monster.getName() << "이(가) 잔소리를 시작합니다.\n";
+	std::cout << monster.GetName() << "이(가) 잔소리를 시작합니다.\n";
 
-	int damage = monster.getAtk() - player.GetDef();
+	int damage = monster.GetAtk() - player.GetDef();
 
 	if (damage < 0)
 		damage = 0;
@@ -210,7 +210,7 @@ void BattleManager::MonsterTurn(Player& player, Monster& monster)
 
 bool BattleManager::IsBattleOver(const Player& player, const Monster& monster)
 {
-	if (monster.getPressure() <= 0)
+	if (monster.GetPressure() <= 0)
 		return true;
 
 	if (player.GetMental() <= 0)
@@ -225,8 +225,8 @@ bool BattleManager::IsBattleOver(const Player& player, const Monster& monster)
 void BattleManager::ProcessDefeat(Player& player, Monster& monster)
 {
 	std::cout << "멘탈이 " << player.GetMental() << "이 되었습니다.\n";
-	std::cout << monster.getName() << "에게 잔소리를 심하게 들었습니다.\n";
-	std::cout << monster.getName() << "이(가) 자기 자리로 돌아갑니다.\n";
+	std::cout << monster.GetName() << "에게 잔소리를 심하게 들었습니다.\n";
+	std::cout << monster.GetName() << "이(가) 자기 자리로 돌아갑니다.\n";
 	std::cout << "사직서를 꺼내드는 순간...\n";
 	std::cout << "그 때--\n 멍! 멍!멍!\n";
 	std::cout << "....뽀삐가 떠올랐습니다.";
@@ -250,7 +250,7 @@ void BattleManager::ProcessVictory(Player& player, Monster& monster)
 	std::cout << "[ 전투 승리! ]\n";
 	std::cout << "============================\n";
 
-	std::cout << "휴.. " << monster.getName() << "에게서 무사히 버텨냈습니다.\n";
+	std::cout << "휴.. " << monster.GetName() << "에게서 무사히 버텨냈습니다.\n";
 
 	std::cout << "[ 보상 획득 ]\n";
 
@@ -270,7 +270,7 @@ void BattleManager::ProcessRunAway(Player& player, Monster& monster)
 	std::cout << "[ 도망 성공! ]\n";
 	std::cout << "============================\n";
 
-	std::cout << "간신히 " << monster.getName() << "의 시야에서 벗어났습니다.\n";
+	std::cout << "간신히 " << monster.GetName() << "의 시야에서 벗어났습니다.\n";
 	std::cout << "숨을 고르며 다시 업무 자리로 돌아갑니다.\n";
 
 	std::cout << "============================\n";
