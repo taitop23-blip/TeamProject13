@@ -35,8 +35,7 @@ void SkillManager::Use(Player& user, Monster& target)
 			int dmg = (user.GetAtk() + 20) - target.GetDef();
 			if (dmg < 0) dmg = 0;
 
-			target.GetPressure() - dmg;
-			if (target.GetPressure() < 0) target.GetPressure() = 0;
+			target.TakeDamage(dmg);
 
 			cout << dmg << " 데미지!" << endl;
 		}
@@ -47,9 +46,8 @@ void SkillManager::Use(Player& user, Monster& target)
 			int dmg = user.GetAtk() - target.GetDef();
 			if (dmg < 0) dmg = 0;
 
-			target.GetPressure() -= dmg;
-			if (target.GetPressure() < 0) target.GetPressure() = 0;
-
+			target.TakeDamage(dmg);
+			
 			cout << dmg << " 데미지!" << endl;
 		}
 	}
@@ -58,7 +56,7 @@ void SkillManager::Use(Player& user, Monster& target)
 	else if (type == SkillType::DEFENSE)
 	{
 		cout << "이건 제가 안 했는데요?" << endl;
-		user.GetDef() += 10;
+		user.AddDef(10);
 		cout << "방어력 +10" << endl;
 	}
 
@@ -66,7 +64,7 @@ void SkillManager::Use(Player& user, Monster& target)
 	else if (type == SkillType::HEAL)
 	{
 		cout << "칼퇴 상상" << endl;
-		user.GetFocus() += 30;
+		user.AddFocus(30);
 		cout << "집중력 +30 회복!" << endl;
 	}
 }
@@ -75,5 +73,16 @@ void SkillManager::TickCoolTime()
 {
 	if (currentCoolTime > 0)
 		currentCoolTime--;
+}
+
+void SkillManager::UsebyMonster(Monster& user, Player& target)
+{
+	cout << "공격!!" << endl;
+	int dmg = user.GetAtk() - target.GetDef();
+	if (dmg < 0) dmg = 0;
+
+	target.SubMental(dmg);
+
+	cout << dmg << " 데미지!" << endl;
 }
 
