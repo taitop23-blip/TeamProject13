@@ -11,9 +11,9 @@ private:
 public:
 	ShopManager() {}	// Item class의 instance 생성 시, shopInventory 채울 예정 
 	~ShopManager() {}
-	void displayItems();     	// 상점 물품 출력
-	void buyItem(Player& player);	// 구매, 플레이어 인벤토리에 아이템 추가
-//	void sellItem(Player& player);	// 판매, 아직 구현 미정, 구현 시 플레이어 인벤토리 아이템 소멸  
-	void shopConsole(Player& player);			// 상점 조작 콘솔 
+	void DisplayItems();     	// 상점 물품 출력
+	void BuyItem(Player& player);	// 구매, 플레이어 인벤토리에 아이템 추가
+	void SellItem(Player& player);	// 판매, 플레이어 인벤토리의 아이템 소멸  
+	void ShopConsole(Player& player);			// 상점 조작 콘솔 
 };
 
