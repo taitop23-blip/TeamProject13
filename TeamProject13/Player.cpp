@@ -225,3 +225,8 @@ void Player::ShowCurrentStatus() const
     std::cout << "골드: " << gold << "G\n";
     Utils::PrintLine('=', 44);
 }
+
+void Player::ResetTempStats() {
+    tempAtkBonus = 0;
+    tempDefBonus = 0;
+}
