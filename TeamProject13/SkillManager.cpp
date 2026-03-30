@@ -39,7 +39,7 @@ void SkillManager::Use(Player& user, Monster& target)
         if (name == "야근싫어")
         {
             std::cout << "야근 싫어!\n";
-            int dmg = (user.GetAtk() + 20) - target.GetDef();
+            int dmg = (user.GetAtk() + power) - target.GetDef();
             if (dmg < 0) dmg = 0;
 
             target.TakeDamage(dmg);
@@ -48,7 +48,7 @@ void SkillManager::Use(Player& user, Monster& target)
         else if (name == "복붙")
         {
             std::cout << "Ctrl+c Ctrl+v\n";
-            int dmg = user.GetAtk() - target.GetDef();
+            int dmg = (user.GetAtk() + power) - target.GetDef();
             if (dmg < 0) dmg = 0;
 
             target.TakeDamage(dmg);
