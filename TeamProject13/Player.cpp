@@ -90,6 +90,11 @@ void Player::AddDef(int val)
     def = std::max(0, def + val);
 }
 
+void Player::AddLife()
+{  
+    life += 1;
+}
+
 void Player::SubMental(int val)
 {
     mental = std::max(0, mental - val);

@@ -59,6 +59,7 @@ public:
     void AddExp(int val);
     void AddAtk(int val);
     void AddDef(int val);
+    void AddLife(); //
 
 
     //Set
