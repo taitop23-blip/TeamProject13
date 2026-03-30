@@ -164,6 +164,8 @@ void BattleManager::PlayerTurn(Player& player, Monster& monster)
 	}
 
 	case 2:
+		system("cls");
+		DisplayStatus(player, monster);
 		DisplaySkillMenu(player);
 
 		if (UseSkill(player, monster))
@@ -172,6 +174,9 @@ void BattleManager::PlayerTurn(Player& player, Monster& monster)
 		}
 		else
 		{
+			system("cls");
+			DisplayStatus(player, monster);
+			DisplayMenu();
 			break;
 		}
 
@@ -414,6 +419,8 @@ void BattleManager::ProcessVictory(Player& player, Monster& monster)
 	std::cout << "\n Enter를 누르세요....";
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	std::cin.get();
+
+	system("cls");
 
 	// [수정/추가사항] 주석 처리되어 있던 플레이어 보상 적용 함수 호출 활성화
 	player.AddExp(expReward);
