@@ -10,6 +10,39 @@
 #include <cstdlib>
 #include <ctime>
 #include <limits>
+#include <windows.h>
+
+void SetColor(int color)
+{
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
+}
+
+void PrintBar(int current, int max, int fillColor, int emptyColor, int barWidth = 20)
+{
+	if (max <= 0) return;
+
+	float ratio = (float)current / max;
+	int filled = (int)(ratio * barWidth);
+
+	std::cout << "[";
+
+	for (int i = 0; i < barWidth; ++i)
+	{
+		if (i < filled)
+		{
+			SetColor(fillColor);
+			std::cout << "█";
+		}
+		else
+		{
+			SetColor(emptyColor);
+			std::cout << "█";
+		}
+	}
+
+	SetColor(7);
+	std::cout << "]";
+}
 
 // [수정/추가사항] LNK2019 (unresolved external symbol) 링킹 에러 해결을 위해 생성자 구현부 추가
 BattleManager::BattleManager()
@@ -36,14 +69,14 @@ bool BattleManager::StartBattle(Player& player, Monster& monster)
 		if (IsBattleOver(player, monster)) break;
 
 		std::cout << "\n계속하려면 Enter를 누르세요...";
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		std::cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n');
 		std::cin.get();
 
 		system("cls");
 		MonsterTurn(player, monster);
 
 		std::cout << "\n계속하려면 Enter를 누르세요...";
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		std::cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n');
 		std::cin.get();
 
 		if (player.GetMental() <= 0)
@@ -99,7 +132,11 @@ void BattleManager::DisplayStatus(const Player& player, const Monster& monster)
 	std::cout << monster.GetName() << "이 등장했습니다.\n";
 	std::cout << std::left << std::setw(10) << "압박감"
 		<< " : " << std::right << std::setw(3) << monster.GetPressure() << " / "
-		<< std::setw(3) << monster.GetMaxPressure() << '\n';
+		<< std::setw(3) << monster.GetMaxPressure() << "  ";
+
+	PrintBar(monster.GetPressure(), monster.GetMaxPressure(), 10, 12);
+
+	std::cout << '\n';
 
 	std::cout << "\n===========================================\n";
 
@@ -111,11 +148,17 @@ void BattleManager::DisplayStatus(const Player& player, const Monster& monster)
 
 	std::cout << std::left << std::setw(10) << "멘탈"
 		<< " : " << std::right << std::setw(3) << player.GetMental() << " / "
-		<< std::setw(3) << player.GetMaxMental() << '\n';
+		<< std::setw(3) << player.GetMaxMental() << "  ";
+
+	PrintBar(player.GetMental(), player.GetMaxMental(), 10, 12);
+	std::cout << '\n';
 
 	std::cout << std::left << std::setw(11) << "집중력"
 		<< " : " << std::right << std::setw(3) << player.GetFocus() << " / "
-		<< std::setw(3) << player.GetMaxFocus() << '\n';
+		<< std::setw(3) << player.GetMaxFocus() << "  ";
+
+	PrintBar(player.GetFocus(), player.GetMaxFocus(), 9, 14);
+	std::cout << '\n';
 
 	int life = player.GetLife();
 
@@ -317,7 +360,10 @@ void BattleManager::MonsterTurn(Player& player, Monster& monster)
 	player.takeDamage(damage);
 
 	std::cout << player.GetName() << "이(가) " << damage << "만큼 멘탈이 피해를 받았습니다!!\n";
-	std::cout << "현재 멘탈 : " << player.GetMental() << " / " << player.GetMaxMental() << "\n";
+	std::cout << "현재 멘탈 : " << player.GetMental() << " / " << player.GetMaxMental() << "  ";
+
+	PrintBar(player.GetMental(), player.GetMaxMental(), 10, 12);
+	std::cout << '\n';
 
 	// [수정/추가사항] 몬스터 턴 종료 시 플레이어 스킬의 쿨타임(CoolTime)을 감소시키는 로직 추가
 	for (SkillManager& skill : skills) {
@@ -417,7 +463,7 @@ void BattleManager::ProcessVictory(Player& player, Monster& monster)
 	std::cout << "============================\n";
 
 	std::cout << "\n Enter를 누르세요....";
-	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	std::cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n');
 	std::cin.get();
 
 	system("cls");
