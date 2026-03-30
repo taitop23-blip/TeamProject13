@@ -3,6 +3,8 @@
 #include "BattleManager.h"
 #include "Monster.h"
 #include "Utils.h"
+#include "ConsoleWidget.h"
+
 #include <iostream>
 #include <ctime>
 #include <string>
@@ -21,19 +23,21 @@ static void SetupConsoleEncoding()
 
 static Player SelectCharacter()
 {
-    std::cout << "\n======================= [ 캐릭터 선택 ] =======================\n";
-    std::cout << "1. A형 사원 (공격형 | 멘탈 170, 집중력 95, ATK 34, DEF 10)\n";
-    std::cout << "2. B형 사원 (밸런스 | 멘탈 210, 집중력 85, ATK 28, DEF 15)\n";
-    std::cout << "3. C형 사원 (방어형 | 멘탈 250, 집중력 70, ATK 22, DEF 22)\n";
-    std::cout << "===============================================================\n";
+    ConsoleWidget::CaptureAndDrawBox([&]() {
+        std::cout << "\n======================= [ 캐릭터 선택 ] =======================\n";
+        std::cout << "1. A형 사원 (공격형 | 멘탈 170, 집중력 95, ATK 34, DEF 10)\n";
+        std::cout << "2. B형 사원 (밸런스 | 멘탈 210, 집중력 85, ATK 28, DEF 15)\n";
+        std::cout << "3. C형 사원 (방어형 | 멘탈 250, 집중력 70, ATK 22, DEF 22)\n";
+        std::cout << "===============================================================\n";
+        });
 
-    int choice = Utils::GetInput(1, 3, "선택: ");
-    switch (choice) {
-    case 1: return Player("A형 사원", 170, 95, 34, 10);
-    case 2: return Player("B형 사원", 210, 85, 28, 15);
-    case 3: return Player("C형 사원", 250, 70, 22, 22);
-    default: return Player("B형 사원", 210, 85, 28, 15);
-    }
+        int choice = Utils::GetInput(1, 3, "선택: ");
+        switch (choice) {
+        case 1: return Player("A형 사원", 170, 95, 34, 10);
+        case 2: return Player("B형 사원", 210, 85, 28, 15);
+        case 3: return Player("C형 사원", 250, 70, 22, 22);
+        default: return Player("B형 사원", 210, 85, 28, 15);
+        }
 }
 
 static bool RunFinalBoss(Player& p)
@@ -58,13 +62,15 @@ int main()
     SetupConsoleEncoding();
     std::srand(static_cast<unsigned>(std::time(nullptr)));
 
-    Utils::PrintLine('=', 30);
-    std::cout << "펄없이스의 등대 - 야근하기 싫어!!!\n";
-    Utils::PrintLine('=', 30);
+    ConsoleWidget::CaptureAndDrawBox([&]() {
+        Utils::PrintLine('=', 30);
+        std::cout << "펄없이스의 등대 - 야근하기 싫어!!!\n";
+        Utils::PrintLine('=', 30);
 
-    std::cout << "???은 펄없이스에서 근무하고 있는 이른바 사축이다.\n";
-    std::cout << "늘 그의 정장 안쪽 주머니에는 사직서가...\n";
-    std::cout << "오늘도 무사히 퇴근 할 수 있을까?\n";
+        std::cout << "???는 펄없이스에서 근무하고 있는 이른바 사축이다.\n";
+        std::cout << "늘 그의 정장 안쪽 주머니에는 사직서가...\n";
+        std::cout << "오늘도 무사히 퇴근 할 수 있을까?\n";
+        });
 
     Player player = SelectCharacter();
     WorldManager world;
