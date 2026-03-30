@@ -216,15 +216,21 @@ bool Player::RemoveItem(std::size_t index)
 // [수정/추가사항 6] LNK2019 링킹 에러의 원인이었던 인벤토리 출력(PrintInventory) 함수 구현 완료
 void Player::PrintInventory() const
 {
+    ConsoleWidget::CaptureAndDrawBox([&]() {
+    Utils::PrintLine('=', 50);
     std::cout << "\n[인벤토리]\n";
     if (inventory.empty()) {
-        std::cout << "보유한 아이템이 없습니다.\n";
+    
+        std::cout << "보유한 아이템이 없습니다. \n";
+        Utils::PrintLine('=', 50);
         return;
     }
 
     for (std::size_t i = 0; i < inventory.size(); ++i) {
         std::cout << i + 1 << ". " << inventory[i].GetName() << "\n";
     }
+        });
+    std::cout << "\n";
 }
 
 // [수정/추가사항 7] 플레이어의 현재 스탯과 진행 상황을 한눈에 보여주는 상태창 출력 함수 구현 완료
