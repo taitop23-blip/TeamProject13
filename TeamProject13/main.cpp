@@ -5,13 +5,16 @@
 #include "Utils.h"
 #include "ConsoleWidget.h"
 
+#ifdef _WIN32
+#include <windows.h>
+#endif
+#include <mmsystem.h>
+#pragma comment(lib, "winmm.lib")
 #include <iostream>
 #include <ctime>
 #include <string>
 #include <conio.h>
-#ifdef _WIN32
-#include <windows.h>
-#endif
+
 
 static void SetupConsoleEncoding()
 {
@@ -21,6 +24,28 @@ static void SetupConsoleEncoding()
 #endif
     std::setlocale(LC_ALL, ".UTF-8");
 }
+
+class SoundManager {
+public:
+    static void PlayBGM(const std::string& fileName, int volume = 200) { // 기본 볼륨을 200으로 설정
+        mciSendStringA("stop mybgm", NULL, 0, NULL);
+        mciSendStringA("close mybgm", NULL, 0, NULL);
+
+        std::string openCmd = "open \"" + fileName + "\" type mpegvideo alias mybgm";
+        mciSendStringA(openCmd.c_str(), NULL, 0, NULL);
+
+        // (볼륨 설정)
+        std::string volCmd = "setaudio mybgm volume to " + std::to_string(volume);
+        mciSendStringA(volCmd.c_str(), NULL, 0, NULL);
+
+        mciSendStringA("play mybgm repeat", NULL, 0, NULL);
+    }
+
+    static void StopBGM() {
+        mciSendStringA("stop mybgm", NULL, 0, NULL);
+        mciSendStringA("close mybgm", NULL, 0, NULL);
+    }
+};
 
 static Player SelectCharacter()
 {
@@ -60,6 +85,8 @@ static bool RunFinalBoss(Player& p)
 
 int main()
 {
+    SoundManager::PlayBGM("13-01 Back in my days.wav");
+
     SetupConsoleEncoding();
     std::srand(static_cast<unsigned>(std::time(nullptr)));
     {
