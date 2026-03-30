@@ -226,7 +226,13 @@ void Player::ShowCurrentStatus() const
     Utils::PrintLine('=', 44);
 }
 
-void Player::ResetTempStats() {
+void Player::ResetTempStats() 
+{
     tempAtkBonus = 0;
     tempDefBonus = 0;
+}
+
+int Player::GetTotalDef() const 
+{
+    return def + tempDefBonus;
 }
