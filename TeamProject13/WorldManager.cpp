@@ -24,7 +24,8 @@ void WorldManager::ShowActionMenu(const Player& p) const
             << " | 라이프 " << p.GetLife()
             << " | 골드 " << p.GetGold() << "G\n";
         std::cout << "멘탈 " << p.GetMental() << "/" << p.GetMaxMental()
-            << " | 집중력 " << p.GetFocus() << "/" << p.GetMaxFocus() << "\n";
+            << " | 집중력 " << p.GetFocus() << "/" << p.GetMaxFocus();
+        std::cout << " | LV" << p.GetLevel() << " 경험치 " << p.GetExp() << "/" << p.GetMaxExp() << std::endl;
 
         Utils::PrintLine('-', 55);
         std::cout << " 1. 업무 집중    (진행도+, 멘탈-, 집중력-, 위험도+)\n";
