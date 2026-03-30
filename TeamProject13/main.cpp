@@ -8,6 +8,7 @@
 #include <iostream>
 #include <ctime>
 #include <string>
+#include <conio.h>
 #ifdef _WIN32
 #include <windows.h>
 #endif
@@ -61,18 +62,25 @@ int main()
 {
     SetupConsoleEncoding();
     std::srand(static_cast<unsigned>(std::time(nullptr)));
+    {
+        ConsoleWidget::CaptureAndDrawBox([&]() {
+            Utils::PrintLine('=', 30);
+            std::cout << "펄없이스의 등대 - 야근하기 싫어!!!\n";
+            Utils::PrintLine('=', 30);
 
-    ConsoleWidget::CaptureAndDrawBox([&]() {
-        Utils::PrintLine('=', 30);
-        std::cout << "펄없이스의 등대 - 야근하기 싫어!!!\n";
-        Utils::PrintLine('=', 30);
+            std::cout << "???는 펄없이스에서 근무하고 있는 이른바 사축이다.\n";
+            std::cout << "늘 그의 정장 안쪽 주머니에는 사직서가...\n";
+            std::cout << "오늘도 무사히 퇴근 할 수 있을까?\n";
+            });
+    }
 
-        std::cout << "???는 펄없이스에서 근무하고 있는 이른바 사축이다.\n";
-        std::cout << "늘 그의 정장 안쪽 주머니에는 사직서가...\n";
-        std::cout << "오늘도 무사히 퇴근 할 수 있을까?\n";
-        });
+    std::cout << "\n   아무 키나 누르면 캐릭터 선택으로 넘어갑니다...";
+    _getch(); // 사용자가 키를 하나 누를 때까지 여기서 멈춰있습니다.
 
+    system("cls");
     Player player = SelectCharacter();
+    system("cls");
+
     WorldManager world;
 
     bool reachedBoss = world.RunWorkLoop(player);
