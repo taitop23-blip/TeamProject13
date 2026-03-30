@@ -1,13 +1,12 @@
-#pragma once
-#include <string>
-#include "Player.h"
+癤�#pragma once
 
-class EventManager //이벤트 매니저 클래스
-{
+class Player;
+
+class EventManager {
 public:
-	void ShowBonusMenu(Player& p);
+    void ShowBonusMenu(Player& p);
+    void TriggerRandomEvent(Player& p, int& dangerLevel);
 
 private:
-	void ApplyBonus(Player& p, int choice);
+    void ApplyBonus(Player& p, int choice);
 };
-

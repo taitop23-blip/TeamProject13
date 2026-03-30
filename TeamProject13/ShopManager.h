@@ -1,19 +1,38 @@
-#pragma once
+ï»¿#pragma once
+
 #include "Player.h"
+
 #include "Item.h"
+
 #include <vector>
+
+
 
 class Item;
 
+
+
 class ShopManager {
+
 private:
-	std::vector<Item> shopInventory; // Item class vector. price, itemName Á¤º¸ ÇÊ¿ä 
+
+	std::vector<Item> shopInventory; // Item class vector. price, itemName ì •ë³´ í•„ìš” 
+
 public:
-	ShopManager() {}	// Item classÀÇ instance »ı¼º ½Ã, shopInventory Ã¤¿ï ¿¹Á¤ 
+
+	ShopManager(); 	// Item classì˜ instance ìƒì„± ì‹œ, shopInventory ì±„ìš¸ ì˜ˆì • 
+
 	~ShopManager() {}
-	void DisplayItems();     	// »óÁ¡ ¹°Ç° Ãâ·Â
-	void BuyItem(Player& player);	// ±¸¸Å, ÇÃ·¹ÀÌ¾î ÀÎº¥Åä¸®¿¡ ¾ÆÀÌÅÛ Ãß°¡
-	void SellItem(Player& player);	// ÆÇ¸Å, ÇÃ·¹ÀÌ¾î ÀÎº¥Åä¸®ÀÇ ¾ÆÀÌÅÛ ¼Ò¸ê  
-	void ShopConsole(Player& player);			// »óÁ¡ Á¶ÀÛ ÄÜ¼Ö 
+
+	void DisplayItems();     	// ìƒì  ë¬¼í’ˆ ì¶œë ¥
+
+	void BuyItem(Player& player);	// êµ¬ë§¤, í”Œë ˆì´ì–´ ì¸ë²¤í† ë¦¬ì— ì•„ì´í…œ ì¶”ê°€
+
+	void SellItem(Player& player);	// íŒë§¤, í”Œë ˆì´ì–´ ì¸ë²¤í† ë¦¬ì˜ ì•„ì´í…œ ì†Œë©¸  
+
+	void ShopConsole(Player& player);			// ìƒì  ì¡°ì‘ ì½˜ì†” 
+
 };
+
+
 

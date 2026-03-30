@@ -1,4 +1,4 @@
-// Utils.cpp ±¸ºĞ¼±/ ·£´ı ÇÔ¼ö
+ï»¿// Utils.cpp êµ¬ë¶„ì„ / ëœë¤ í•¨ìˆ˜
 
 #include "Utils.h"
 #include <iostream>
@@ -24,7 +24,7 @@ int Utils::GetInput(int min, int max, const std::string& prompt)
     {
         std::cout << prompt;
         if (std::cin >> val && val >= min && val <= max) return val;
-        std::cout << "  [¿À·ù] " << min << "~" << max << " »çÀÌ ¼ıÀÚ¸¦ ÀÔ·ÂÇÏ¼¼¿ä.\n";
+        std::cout << "  [ì˜¤ë¥˜] " << min << "~" << max << " ì‚¬ì´ ìˆ«ìë¥¼ ì…ë ¥í•˜ì„¸ìš”.\n";
         std::cin.clear();
         std::cin.ignore(1000, '\n');
     }
