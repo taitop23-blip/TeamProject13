@@ -28,6 +28,8 @@ private:
     int tempDefBonus;
     std::vector<Item> inventory;
 
+
+
 public:
     Player();
     Player(const std::string& name, int mental, int focus, int atk, int def);
@@ -58,6 +60,7 @@ public:
     void AddAtk(int val);
     void AddDef(int val);
 
+
     //Set
     void SubMental(int val);
     void SubFocus(int val);
@@ -79,6 +82,11 @@ public:
     void AddTemporaryAtk(int val);
     void AddTemporaryDef(int val);
     void ClearTemporaryBattleBonuses();
+
+    // 스킬 보너스 능력치 초기화 함수
+    void AddTempDef(int val);
+    void ResetTempStats();
+    int GetTotalDef() const;
 
     void AddItem(const Item& item);
     bool HasItems() const { return !inventory.empty(); }

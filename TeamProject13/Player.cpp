@@ -125,6 +125,11 @@ bool Player::SpendGold(int val)
     return true;
 }
 
+void Player::AddTempDef(int val) 
+{
+    tempDefBonus += val;
+}
+
 void Player::RestoreFullMental()
 {
     mental = maxMental;

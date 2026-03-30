@@ -30,6 +30,7 @@ bool BattleManager::StartBattle(Player& player, Monster& monster)
 
 		MonsterTurn(player, monster);
 	}
+	player.ResetTempStats();
 
 	if (player.GetMental() <= 0) {
 		ProcessDefeat(player, monster);

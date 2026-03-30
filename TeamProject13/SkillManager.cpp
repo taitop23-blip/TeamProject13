@@ -62,7 +62,7 @@ void SkillManager::Use(Player& user, Monster& target)
     else if (type == SkillType::DEFENSE)
     {
         std::cout << name << " 스킬을 사용했습니다! 방어력이 증가합니다.\n";
-        user.AddDef(power);
+        user.AddTempDef(power);
     }
     // 회복 스킬 처리
     else if (type == SkillType::HEAL)
