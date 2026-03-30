@@ -16,7 +16,6 @@ WorldManager::WorldManager()
 
 void WorldManager::ShowActionMenu(const Player& p) const
 {
-    system("cls");
     ConsoleWidget::CaptureAndDrawBox([&]() {
         std::cout << "\n======================[ 업무 중 ]======================" << std::endl;
         std::cout << "[사무실] 진행도 " << p.GetProgress()
@@ -26,7 +25,7 @@ void WorldManager::ShowActionMenu(const Player& p) const
         std::cout << "멘탈 " << p.GetMental() << "/" << p.GetMaxMental()
             << " | 집중력 " << p.GetFocus() << "/" << p.GetMaxFocus();
         std::cout << " | LV" << p.GetLevel() << " 경험치 " << p.GetExp() << "/" << p.GetMaxExp() << std::endl;
-
+       
         Utils::PrintLine('-', 55);
         std::cout << " 1. 업무 집중    (진행도+, 멘탈-, 집중력-, 위험도+)\n";
         std::cout << " 2. 커피 충전    (집중력+, 멘탈 소폭-)\n";
@@ -41,17 +40,19 @@ void WorldManager::ShowActionMenu(const Player& p) const
 
 void WorldManager::ShowStatus(const Player& p) const
 {
-    Utils::PrintLine('=', 50);
-    std::cout << "[상태창]\n";
-    std::cout << "이름: " << p.GetName() << " | 레벨: " << p.GetLevel()
-        << " | 경험치: " << p.GetExp() << "/" << p.GetMaxExp() << "\n";
-    std::cout << "멘탈: " << p.GetMental() << "/" << p.GetMaxMental()
-        << " | 집중력: " << p.GetFocus() << "/" << p.GetMaxFocus() << "\n";
-    std::cout << "공격력: " << p.GetAtk() << " | 방어력: " << p.GetDef()
-        << " | 라이프: " << p.GetLife() << "\n";
-    std::cout << "진행도: " << p.GetProgress() << "% | 골드: " << p.GetGold()
-        << "G | 위험도: " << dangerLevel << "\n";
-    Utils::PrintLine('=', 50);
+    ConsoleWidget::CaptureAndDrawBox([&]() {
+        Utils::PrintLine('=', 50);
+        std::cout << "[상태창]\n";
+        std::cout << "이름: " << p.GetName() << " | 레벨: " << p.GetLevel()
+            << " | 경험치: " << p.GetExp() << "/" << p.GetMaxExp() << "\n";
+        std::cout << "멘탈: " << p.GetMental() << "/" << p.GetMaxMental()
+            << " | 집중력: " << p.GetFocus() << "/" << p.GetMaxFocus() << "\n";
+        std::cout << "공격력: " << p.GetAtk() << " | 방어력: " << p.GetDef()
+            << " | 라이프: " << p.GetLife() << "\n";
+        std::cout << "진행도: " << p.GetProgress() << "% | 골드: " << p.GetGold()
+            << "G | 위험도: " << dangerLevel << "\n";
+        Utils::PrintLine('=', 50);
+        });
     p.PrintInventory();
 }
 
@@ -62,18 +63,22 @@ void WorldManager::FocusWork(Player& p)
     p.SubMental(5);
     p.SubFocus(10);
     dangerLevel = std::min(100, dangerLevel + 15);
-
-    std::cout << "\n[업무 집중] 열심히 일했습니다.\n";
-    std::cout << "진행도 +" << progressGain << " | 멘탈 -5 | 집중력 -10 | 위험도 +15\n";
+    ConsoleWidget::CaptureAndDrawBox([&]() {
+        system("cls");
+        std::cout << "\n[업무 집중] 열심히 일했습니다.\n";
+        std::cout << "진행도 +" << progressGain << " | 멘탈 -5 | 집중력 -10 | 위험도 +15\n";
+        });
 }
 
 void WorldManager::DrinkCoffee(Player& p)
 {
     p.AddFocus(20);
     p.SubMental(3);
-
-    std::cout << "\n[커피 충전] 아이스 아메리카노 쭈왑!\n";
-    std::cout << "집중력 +20 | 멘탈 -3\n";
+    ConsoleWidget::CaptureAndDrawBox([&]() {
+        system("cls");
+        std::cout << "\n[커피 충전] 아이스 아메리카노 쭈왑!\n";
+        std::cout << "집중력 +20 | 멘탈 -3\n";
+        });
 }
 
 void WorldManager::WatchYoutube(Player& p)
@@ -82,18 +87,22 @@ void WorldManager::WatchYoutube(Player& p)
     p.AddMental(10);
     p.SubFocus(15);
     dangerLevel = std::min(100, dangerLevel + 20);
-
-    std::cout << "\n[유튜브 시청] 잠깐만 보려다가...\n";
-    std::cout << "진행도 -5 | 멘탈 +10 | 집중력 -15 | 위험도 +20\n";
+    ConsoleWidget::CaptureAndDrawBox([&]() {
+        system("cls");
+        std::cout << "\n[유튜브 시청] 잠깐만 보려다가...\n";
+        std::cout << "진행도 -5 | 멘탈 +10 | 집중력 -15 | 위험도 +20\n";
+        });
 }
 
 void WorldManager::Stretching(Player& p)
 {
     p.AddMental(8);
     p.AddFocus(5);
-
-    std::cout << "\n[몰래 스트레칭] 슬쩍 기지개를 켭니다.\n";
-    std::cout << "멘탈 +8 | 집중력 +5\n";
+    ConsoleWidget::CaptureAndDrawBox([&]() {
+        system("cls");
+        std::cout << "\n[몰래 스트레칭] 슬쩍 기지개를 켭니다.\n";
+        std::cout << "멘탈 +8 | 집중력 +5\n";
+        });
 }
 
 bool WorldManager::CheckEncounter()
