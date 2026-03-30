@@ -47,7 +47,7 @@ void ConsoleWidget::DrawMultiLineBox(const std::vector<std::string>& lines)
     int paddingX = 2;
     int innerWidth = maxWidth + (paddingX * 2);
 
-    // 3. 윗 테두리 (█가 1칸이므로 내부너비 + 양쪽벽(2) 만큼 그대로 찍습니다)
+    // 3. 윗 테두리 █가 1칸이므로 내부너비 + 양쪽벽(2) 만큼 그대로 찍음
     std::cout << "\n ";
     for (int i = 0; i < innerWidth + 2; ++i) {
         std::cout << "█";

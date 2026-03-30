@@ -34,4 +34,5 @@ public:
     void ResetDanger() { dangerLevel = 0; }
     int GetDanger() const { return dangerLevel; }
     bool IsReadyForFinalBoss(int currentProgress);
+    void ShowGameObjective() const;
 };

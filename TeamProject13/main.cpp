@@ -127,10 +127,12 @@ int main()
     _getch(); // 사용자가 키를 하나 누를 때까지 여기서 멈춰있습니다.
 
     system("cls");
+    WorldManager world; 
+    world.ShowGameObjective(); 
+
+    system("cls");
     Player player = SelectCharacter();
     system("cls");
-
-    WorldManager world;
 
     bool reachedBoss = world.RunWorkLoop(player);
 

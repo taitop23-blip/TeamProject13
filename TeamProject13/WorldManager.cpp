@@ -9,6 +9,7 @@
 #include <vector>
 #include <algorithm>
 #include <cstdlib>
+#include <conio.h>
 
 WorldManager::WorldManager()
     : dangerLevel(0), isFinalBossAppeared(false), bonusLvl3(false), bonusLvl6(false), bonusLvl9(false) {
@@ -36,6 +37,31 @@ void WorldManager::ShowActionMenu(const Player& p) const
         std::cout << " 7. 게임 종료\n";
         Utils::PrintLine('-', 55);
         });
+}
+
+void WorldManager::ShowGameObjective() const
+{
+    ConsoleWidget::CaptureAndDrawBox([&]() {
+        std::cout << "======================== [ 게임 목표 ] ========================\n";
+        std::cout << "\n";
+        std::cout << " 1. 최종 목표 : 무사히 업무를 마치고 '정시 퇴근' 하십시오!\n";
+        std::cout << "\n";
+        std::cout << " 2. 상태 관리 : 업무를 하면 [멘탈]과 [집중력]이 깎입니다.\n";
+        std::cout << "                스트레스로 멘탈이 바닥나면 과로사(게임오버)!\n";
+        std::cout << "\n";
+        std::cout << " 3. 돌발 전투 : 업무 중이거나 농땡이를 피울 때, 예고 없이\n";
+        std::cout << "                회사 내 빌런이 등장해 전투가 벌어집니다.\n";
+        std::cout << "\n";
+        std::cout << " 4. 최종 보스 : 진행도가 100%가 되면 [최종보스 팀장님]이 나타납니다!\n";
+        std::cout << "\n";
+        std::cout << " 5. 게임 승리 : 퇴근 직전 [팀장님]의 최종 결재를 넘어\n";
+        std::cout << "                무사히 야근 지옥에서 살아남으세요!\n";
+        std::cout << "\n";
+        std::cout << "===============================================================\n";
+        });
+
+    std::cout << "\n   [ 숙지했습니다. (아무 키나 눌러 다음으로 이동) ]";
+    _getch();
 }
 
 void WorldManager::ShowStatus(const Player& p) const
@@ -146,6 +172,7 @@ bool WorldManager::IsReadyForFinalBoss(int currentProgress)
     }
     return false;
 }
+
 
 void WorldManager::CheckLevelBonus(Player& p)
 {
