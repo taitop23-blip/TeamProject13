@@ -25,6 +25,19 @@ static void SetupConsoleEncoding()
     std::setlocale(LC_ALL, ".UTF-8");
 }
 
+enum class ConsoleColor {
+    WHITE = 7,
+    GREEN = 10,
+    CYAN = 11,
+    RED = 12,
+    YELLOW = 14,
+    BRIGHT_WHITE = 15
+};
+
+void SetColor(ConsoleColor color) {
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), (WORD)color);
+}
+
 class SoundManager {
 public:
     static void PlayBGM(const std::string& fileName, int volume = 200) { // 기본 볼륨을 200으로 설정
@@ -72,11 +85,20 @@ static bool RunFinalBoss(Player& p)
     p.AddItem(Item(ItemType::HOTSIX));
     p.AddItem(Item(ItemType::KEYBOARD));
 
-    std::cout << "\n최종 결재를 앞두고 모든 자료를 다시 정리했습니다.\n";
-    std::cout << "멘탈과 집중력이 완전히 회복되었고, 마지막 대비용 아이템도 챙겼습니다.\n";
-    Utils::PrintLine('*', 46);
-    std::cout << "★★★ 최종 보스 등장 : 팀장님 ★★★\n";
-    Utils::PrintLine('*', 46);
+    system("cls");
+    ConsoleWidget::CaptureAndDrawBox([&]() {
+        SetColor(ConsoleColor::YELLOW);
+        std::cout << "\n [ 긴급: 최종 결재 서류 준비 완료 ]\n";
+        SetColor(ConsoleColor::WHITE);
+        std::cout << "\n최종 결재를 앞두고 모든 자료를 다시 정리했습니다.\n";
+        std::cout << "멘탈과 집중력이 완전히 회복되었고, 마지막 대비용 아이템도 챙겼습니다.\n";
+
+        SetColor(ConsoleColor::RED);
+        Utils::PrintLine('*', 46);
+        std::cout << "★★★ 최종 보스 등장 : 팀장님 ★★★\n";
+        Utils::PrintLine('*', 46);
+        SetColor(ConsoleColor::WHITE);
+        });
 
     Monster boss("팀장님", 260, 32, 14, 120, 500);
     BattleManager bm;
@@ -91,9 +113,9 @@ int main()
     std::srand(static_cast<unsigned>(std::time(nullptr)));
     {
         ConsoleWidget::CaptureAndDrawBox([&]() {
-            Utils::PrintLine('=', 30);
-            std::cout << "펄없이스의 등대 - 야근하기 싫어!!!\n";
-            Utils::PrintLine('=', 30);
+            Utils::PrintLine('=', 50);
+            std::cout << "-------펄없이스의 등대 - 야근하기 싫어!!!-------\n";
+            Utils::PrintLine('=', 50);
 
             std::cout << "???는 펄없이스에서 근무하고 있는 이른바 사축이다.\n";
             std::cout << "늘 그의 정장 안쪽 주머니에는 사직서가...\n";

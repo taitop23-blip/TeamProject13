@@ -36,34 +36,59 @@ void ConsoleWidget::DrawMultiLineBox(const std::vector<std::string>& lines)
 {
     if (lines.empty()) return;
 
-    // 1. 시각적 기준 가장 긴 너비 찾기
+    // 1. 가장 긴 줄의 시각적 너비 구하기
     int maxWidth = 0;
     for (const auto& line : lines) {
-        int vWidth = GetVisualWidth(line); // 변경!
+        int vWidth = GetVisualWidth(line);
         if (vWidth > maxWidth) maxWidth = vWidth;
     }
 
-    // 2. 윗 테두리
-    std::cout << " █";
-    for (int i = 0; i < maxWidth + 2; ++i) std::cout << "█";
-    std::cout << "█\n";
+    // 2. 전체 박스의 '내부 너비' 계산 (글자 + 좌우 여백 2칸씩)
+    int paddingX = 2;
+    int innerWidth = maxWidth + (paddingX * 2);
 
-    // 3. 내용 출력
+    // 3. 윗 테두리 (█가 1칸이므로 내부너비 + 양쪽벽(2) 만큼 그대로 찍습니다)
+    std::cout << "\n ";
+    for (int i = 0; i < innerWidth + 2; ++i) {
+        std::cout << "█";
+    }
+    std::cout << "\n";
+
+    // 4. 상단 빈 줄 (천장 공백)
+    std::cout << " █"; // 왼쪽 벽 (1칸)
+    for (int i = 0; i < innerWidth; ++i) {
+        std::cout << " ";
+    }
+    std::cout << "█\n"; // 오른쪽 벽 (1칸)
+
+    // 5. 내용 출력
     for (const auto& line : lines) {
-        int vWidth = GetVisualWidth(line); // 현재 줄의 시각적 너비
-        std::cout << " █ " << line;
+        int vWidth = GetVisualWidth(line);
 
-        // 4. 모자란 칸수만큼 공백 채우기
-        for (int i = 0; i < maxWidth - vWidth; ++i) {
+        // 왼쪽 벽(█) + 왼쪽 공백 2칸
+        std::cout << " █  " << line;
+
+        // 남은 공백 계산 = (최대너비 - 현재글자너비) + 오른쪽 공백 2칸
+        int spacesToFill = (maxWidth - vWidth) + paddingX;
+        for (int i = 0; i < spacesToFill; ++i) {
             std::cout << " ";
         }
-        std::cout << " █\n";
+        std::cout << "█\n"; // 오른쪽 벽
     }
 
-    // 5. 아래 테두리
+    // 6. 하단 빈 줄 (바닥 공백)
     std::cout << " █";
-    for (int i = 0; i < maxWidth + 2; ++i) std::cout << "█";
+    for (int i = 0; i < innerWidth; ++i) {
+        std::cout << " ";
+    }
     std::cout << "█\n";
+
+    // 7. 아래 테두리
+    std::cout << " ";
+    for (int i = 0; i < innerWidth + 2; ++i) {
+        std::cout << "█";
+    }
+    std::cout << "\n\n";
 }
 
 void ConsoleWidget::DrawStringBox(const std::string& fullText)
