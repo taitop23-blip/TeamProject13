@@ -3,9 +3,12 @@
 #include "BattleManager.h"
 #include "Player.h"
 #include "Utils.h"
+#include "ConsoleWidget.h"
+
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <cstdlib>
 
 WorldManager::WorldManager()
     : dangerLevel(0), isFinalBossAppeared(false), bonusLvl3(false), bonusLvl6(false), bonusLvl9(false) {
@@ -13,23 +16,26 @@ WorldManager::WorldManager()
 
 void WorldManager::ShowActionMenu(const Player& p) const
 {
-    std::cout << "\n========[ 업무 중 ]========" << std::endl;
-    std::cout << "[사무실] 진행도 " << p.GetProgress()
-        << "% | 위험도 " << dangerLevel
-        << " | 라이프 " << p.GetLife()
-        << " | 골드 " << p.GetGold() << "G\n";
-    std::cout << "멘탈 " << p.GetMental() << "/" << p.GetMaxMental()
-        << " | 집중력 " << p.GetFocus() << "/" << p.GetMaxFocus() << "\n";
+    system("cls");
+    ConsoleWidget::CaptureAndDrawBox([&]() {
+        std::cout << "\n======================[ 업무 중 ]======================" << std::endl;
+        std::cout << "[사무실] 진행도 " << p.GetProgress()
+            << "% | 위험도 " << dangerLevel
+            << " | 라이프 " << p.GetLife()
+            << " | 골드 " << p.GetGold() << "G\n";
+        std::cout << "멘탈 " << p.GetMental() << "/" << p.GetMaxMental()
+            << " | 집중력 " << p.GetFocus() << "/" << p.GetMaxFocus() << "\n";
 
-    Utils::PrintLine('-', 40);
-    std::cout << " 1. 업무 집중    (진행도+, 멘탈-, 집중력-, 위험도+)\n";
-    std::cout << " 2. 커피 충전    (집중력+, 멘탈 소폭-)\n";
-    std::cout << " 3. 유튜브 시청  (진행도-, 멘탈+, 집중력-, 위험도++)\n";
-    std::cout << " 4. 몰래 스트레칭(멘탈+, 집중력 소폭+)\n";
-    std::cout << " 5. 사내 매점 가기\n";
-    std::cout << " 6. 상태/인벤토리 보기\n";
-    std::cout << " 7. 게임 종료\n";
-    Utils::PrintLine('-', 40);
+        Utils::PrintLine('-', 55);
+        std::cout << " 1. 업무 집중    (진행도+, 멘탈-, 집중력-, 위험도+)\n";
+        std::cout << " 2. 커피 충전    (집중력+, 멘탈 소폭-)\n";
+        std::cout << " 3. 유튜브 시청  (진행도-, 멘탈+, 집중력-, 위험도++)\n";
+        std::cout << " 4. 몰래 스트레칭(멘탈+, 집중력 소폭+)\n";
+        std::cout << " 5. 사내 매점 가기\n";
+        std::cout << " 6. 상태/인벤토리 보기\n";
+        std::cout << " 7. 게임 종료\n";
+        Utils::PrintLine('-', 55);
+        });
 }
 
 void WorldManager::ShowStatus(const Player& p) const
