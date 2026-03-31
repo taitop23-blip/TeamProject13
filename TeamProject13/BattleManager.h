@@ -8,6 +8,15 @@
 
 #include <vector>
 
+enum class BattleResult
+{
+    Victory,
+    Collapse,
+    Defeat,
+    RunAway,
+    Revived
+};
+
 class BattleManager
 {
 private:
@@ -20,7 +29,7 @@ public:
 
     void SetSkillManager(SkillManager* sm);
 
-    bool StartBattle(Player& player, Monster& monster);
+    BattleResult StartBattle(Player& player, Monster& monster);
 
 private:
     void DisplayStatus(const Player& player, const Monster& monster);
@@ -35,6 +44,7 @@ private:
 
     bool IsBattleOver(const Player& player, const Monster& monster);
 
+    void ProcessCollapse(Player& player, Monster& monster);
     void ProcessDefeat(Player& player, Monster& monster);
     void ProcessVictory(Player& player, Monster& monster);
     void ProcessRunAway(Player& player, Monster& monster);

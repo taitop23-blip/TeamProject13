@@ -42,9 +42,9 @@ void EventManager::ApplyBonus(Player& p, int choice)
 }
 
 // [수정/추가사항] LNK2019 링킹 에러를 해결하기 위해 TriggerRandomEvent (랜덤 이벤트) 구현부 전체 추가
-void EventManager::TriggerRandomEvent(Player& p, int& dangerLevel)
+bool EventManager::TriggerRandomEvent(Player& p, int& dangerLevel)
 {
-    if (Utils::GetRandom(1, 100) > 25) return;
+    if (Utils::GetRandom(1, 100) > 25) return false;
 
     Utils::PrintLine('-', 46);
     switch (Utils::GetRandom(1, 4)) {
@@ -75,4 +75,5 @@ void EventManager::TriggerRandomEvent(Player& p, int& dangerLevel)
         break;
     }
     Utils::PrintLine('-', 46);
+    return true;
 }

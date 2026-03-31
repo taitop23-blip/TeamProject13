@@ -6,7 +6,6 @@
 
 #include <algorithm>
 #include <iostream>
-#include "ConsoleWidget.h"
 
 // [수정/추가사항 2] 플레이어 객체 생성 시 기본 스탯(레벨, 체력, 골드 등)을 설정하는 기본 생성자 구현
 Player::Player()
@@ -78,18 +77,6 @@ void Player::AddExp(int val)
         def += 2;
         mental = maxMental;
         focus = maxFocus;
-
-        ConsoleWidget::CaptureAndDrawBox([&]() {
-        std::cout << "\n====================================\n";
-        std::cout << " 레벨 업! Lv." << level << " 달성!\n";
-        std::cout << "====================================\n";
-        std::cout << " 최대 멘탈 +10  → " << maxMental << "\n";
-        std::cout << " 최대 집중력 +5 → " << maxFocus << "\n";
-        std::cout << " 공격력 +2 → " << atk << "\n";
-        std::cout << " 방어력 +2 → " << def << "\n";
-        std::cout << "\n";
-        });
-
     }
 }
 
@@ -216,28 +203,20 @@ bool Player::RemoveItem(std::size_t index)
 // [수정/추가사항 6] LNK2019 링킹 에러의 원인이었던 인벤토리 출력(PrintInventory) 함수 구현 완료
 void Player::PrintInventory() const
 {
-    ConsoleWidget::CaptureAndDrawBox([&]() {
-    Utils::PrintLine('=', 50);
     std::cout << "\n[인벤토리]\n";
     if (inventory.empty()) {
-    
-        std::cout << "보유한 아이템이 없습니다. \n";
-        Utils::PrintLine('=', 50);
+        std::cout << "보유한 아이템이 없습니다.\n";
         return;
     }
 
     for (std::size_t i = 0; i < inventory.size(); ++i) {
         std::cout << i + 1 << ". " << inventory[i].GetName() << "\n";
     }
-        });
-    std::cout << "\n";
 }
 
 // [수정/추가사항 7] 플레이어의 현재 스탯과 진행 상황을 한눈에 보여주는 상태창 출력 함수 구현 완료
 void Player::ShowCurrentStatus() const
 {
-    system("cls");
-    ConsoleWidget::CaptureAndDrawBox([&]() {
     Utils::PrintLine('=', 44);
     std::cout << "[플레이어 상태]\n";
     std::cout << "이름: " << name << "\n";
@@ -250,7 +229,6 @@ void Player::ShowCurrentStatus() const
     std::cout << "라이프: " << life << "\n";
     std::cout << "골드: " << gold << "G\n";
     Utils::PrintLine('=', 44);
-    });
 }
 
 void Player::ResetTempStats() 
@@ -262,4 +240,26 @@ void Player::ResetTempStats()
 int Player::GetTotalDef() const 
 {
     return def + tempDefBonus;
+}
+
+
+// 플레이어 부활 함수 추가
+bool Player::TryAutoRevive()
+{
+    for (std::size_t i = 0; i < inventory.size(); ++i)
+    {
+        if (inventory[i].GetLifeBonus() > 0)
+        {
+            std::cout << inventory[i].GetName() << "이(가) 자동으로 사용되었습니다.\n";
+
+            RemoveItem(i);
+
+            life = 1;
+            RestoreFullMental();
+            RestoreFullFocus();
+
+            return true;
+        }
+    }
+    return false;
 }

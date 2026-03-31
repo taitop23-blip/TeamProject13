@@ -96,4 +96,5 @@ public:
     bool RemoveItem(std::size_t index);
     void PrintInventory() const;
     void ShowCurrentStatus() const;
+    bool TryAutoRevive();
 };
