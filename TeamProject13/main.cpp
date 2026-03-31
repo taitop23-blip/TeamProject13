@@ -154,14 +154,18 @@ int main()
     Utils::PrintLine('=', 30);
     if (victory)
     {
-        std::cout << "[진엔딩]\n";
-        std::cout << "축하합니다! 최종결재 완료!\n";
-        std::cout << "당신은 전설의 월급루팡이 되었습니다!\n";
+        ConsoleWidget::CaptureAndDrawBox([&]() {
+            std::cout << "[진엔딩]\n";
+            std::cout << "축하합니다! 최종결재 완료!\n";
+            std::cout << "당신은 전설의 월급루팡이 되었습니다!\n";
+            });
     }
     else
     {
-        std::cout << "[배드엔딩]\n";
-        std::cout << "근무태만으로 회사에서 짤렸습니다.\n";
+        ConsoleWidget::CaptureAndDrawBox([&]() {
+            std::cout << "[배드엔딩]\n";
+            std::cout << "근무태만으로 회사에서 짤렸습니다.\n";
+            });
     }
     Utils::PrintLine('=', 30);
 
