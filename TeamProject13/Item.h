@@ -48,6 +48,7 @@ public:
             FocusRecovery = 0;
             AtkBonus = 0;
             DefBonus = 0;
+            ProgressBonus = 0;
             break;
 
         case ItemType::POPPY_PHOTO:
@@ -59,6 +60,7 @@ public:
             FocusRecovery = 0;
             AtkBonus = 0;
             DefBonus = 0;
+            ProgressBonus = 0;
             break;
 
         case ItemType::COFFEE:
@@ -70,6 +72,7 @@ public:
             FocusRecovery = 0;
             AtkBonus = 0;
             DefBonus = 0;
+            ProgressBonus = 0;
             break;
 
         case ItemType::HOTSIX:
@@ -81,6 +84,7 @@ public:
             FocusRecovery = 20;
             AtkBonus = 0;
             DefBonus = 0;
+            ProgressBonus = 0;
             break;
 
         case ItemType::KEYBOARD:
