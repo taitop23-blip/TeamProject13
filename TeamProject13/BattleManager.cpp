@@ -12,6 +12,13 @@
 #include <limits>
 #include <windows.h>
 
+static void WaitForEnter()
+{
+	std::cout << "\n계속하려면 Enter를 누르세요...";
+	std::cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n');
+	std::cin.get();
+}
+
 void SetColor(int color)
 {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
@@ -68,16 +75,12 @@ BattleResult BattleManager::StartBattle(Player& player, Monster& monster)
 		PlayerTurn(player, monster);
 		if (IsBattleOver(player, monster)) break;
 
-		std::cout << "\n계속하려면 Enter를 누르세요...";
-		std::cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n');
-		std::cin.get();
+		WaitForEnter();
 
 		system("cls");
 		MonsterTurn(player, monster);
 
-		std::cout << "\n계속하려면 Enter를 누르세요...";
-		std::cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n');
-		std::cin.get();
+		WaitForEnter();
 
 		if (player.GetMental() <= 0)
 		{
@@ -233,6 +236,7 @@ void BattleManager::PlayerTurn(Player& player, Monster& monster)
 		{
 			std::cout << "(지금이다!!!!!)\n";
 			isRunningAway = true;
+			WaitForEnter();
 		}
 		else
 		{
@@ -271,10 +275,14 @@ bool BattleManager::UseSkill(Player& player, Monster& monster)
 		{
 			case 1:
 				skills[0].Use(player, monster);
+				if (monster.IsDefeated() || monster.GetPressure() <= 0)
+					WaitForEnter();
 				return true;
 
 			case 2:
 				skills[1].Use(player, monster);
+				if (monster.IsDefeated() || monster.GetPressure() <= 0)
+					WaitForEnter();
 				return true;
 
 			case 3:
@@ -391,9 +399,7 @@ void BattleManager::ProcessCollapse(Player& player, Monster& monster)
 
 	player.RecoverAfterCollapse();
 
-	std::cout << "\n Enter를 누르세요....";
-	std::cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n');
-	std::cin.get();
+	WaitForEnter();
 }
 
 void BattleManager::ProcessDefeat(Player& player, Monster& monster)
@@ -461,9 +467,7 @@ void BattleManager::ProcessVictory(Player& player, Monster& monster)
 
 	std::cout << "============================\n";
 
-	std::cout << "\n Enter를 누르세요....";
-	std::cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n');
-	std::cin.get();
+	WaitForEnter();
 
 	system("cls");
 }
@@ -478,4 +482,6 @@ void BattleManager::ProcessRunAway(Player& player, Monster& monster)
 	std::cout << player.GetName() << "이(가) 숨을 고르며 다시 업무 자리로 돌아갑니다.\n";
 
 	std::cout << "============================\n";
+
+	WaitForEnter();
 }
