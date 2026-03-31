@@ -5,12 +5,14 @@
 #include "Utils.h"
 #include "ConsoleWidget.h"
 
+#ifdef _WIN32
+#include <windows.h>
+#include <mmsystem.h> 
+#pragma comment(lib, "winmm.lib")
 #include <iostream>
 #include <ctime>
 #include <string>
 #include <conio.h>
-#ifdef _WIN32
-#include <windows.h>
 #endif
 
 static void SetupConsoleEncoding()
@@ -60,6 +62,16 @@ static BattleResult RunFinalBoss(Player& p)
 
 int main()
 {
+
+    SetupConsoleEncoding();
+    std::srand(static_cast<unsigned>(std::time(nullptr)));
+
+    mciSendStringA("open \"13-01 Back in my days.wav\" type mpegvideo alias mybgm", nullptr, 0, nullptr);
+
+    mciSendStringA("setaudio mybgm volume to 200", nullptr, 0, nullptr);
+
+    mciSendStringA("play mybgm repeat", nullptr, 0, nullptr);
+
     SetupConsoleEncoding();
     std::srand(static_cast<unsigned>(std::time(nullptr)));
     {
